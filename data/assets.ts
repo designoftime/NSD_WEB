@@ -5,21 +5,22 @@ export const ASSETS = {
         bg: "https://images.unsplash.com/photo-1581579188055-12e8e3a12a7d?q=80&w=2000&auto=format&fit=crop", // Clean medical background
     },
     services: {
-        elderly: "https://images.unsplash.com/photo-1516307365426-bea591f05011?q=80&w=800&auto=format&fit=crop",
+        elderly: "https://plus.unsplash.com/premium_photo-1663036991651-82ee96fcc8d5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         postOp: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
-        newborn: "https://images.unsplash.com/photo-1555252333-9f8e92e65df4?q=80&w=800&auto=format&fit=crop", // Mother baby
-        chronic: "https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=800&auto=format&fit=crop", // Doctor/Patient
+        newborn: "https://images.unsplash.com/photo-1560707854-fb9a10eeaace?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Mother baby
+        chronic: "https://plus.unsplash.com/premium_photo-1661306553628-60554492bf75?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Doctor/Patient
     },
     features: {
-        india: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1200&auto=format&fit=crop", // India city/urban
+        india: "https://plus.unsplash.com/premium_photo-1675686363477-c28d5bf65adb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // India city/urban
     },
     personas: {
-        professional: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop",
+        professional: "https://plus.unsplash.com/premium_photo-1681967053996-4275be0191e7?q=80&w=1193&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         mother: "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?q=80&w=800&auto=format&fit=crop",
         patient: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=800&auto=format&fit=crop",
     },
     logo: {
-        placeholder: "/images/nsd-logo.svg", // We will create this
+        // placeholder: "/images/nsd-logo.svg", // We will create this
+        main: "https://cdn.discordapp.com/attachments/1448241546649538703/1450094410535538749/icon.png?ex=69414928&is=693ff7a8&hm=0360414aec10eea66c685daf253960c8c6b5ba37724a6bb0ca9ebea1c1ef26c9"
     }
 };
 

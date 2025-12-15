@@ -6,8 +6,8 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    question: "Is NSD available in my city?",
-    answer: "We are currently pre-launching in Mumbai, Bangalore, Delhi NCR, and Hyderabad. We plan to expand to other major cities within 6 months of launch.",
+    question: "What healthcare services can I book through NSD?",
+    answer: "NSD offers professional home nursing, post-hospital care, elderly support, and chronic care—delivered safely at your doorstep.",
   },
   {
     question: "Who are the nurses on the platform?",

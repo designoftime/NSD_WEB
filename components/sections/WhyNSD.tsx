@@ -77,8 +77,8 @@ export function WhyNSD() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
                 <div className="text-white">
-                  <p className="font-bold text-lg mb-1">“We found a nurse who speaks Kannada!”</p>
-                  <p className="text-sm opacity-90">— The Sharma Family, Bangalore</p>
+                  <p className="font-bold text-lg mb-1">“Hospital-grade care, right at your doorstep!”</p>
+                  <p className="text-sm opacity-90">— Serving Indore with compassion and trust</p>
                 </div>
               </div>
             </div>

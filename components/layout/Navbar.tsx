@@ -34,7 +34,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           {/* Using CSS mask or just simple img for now. SVG is best. */}
-          <img src={ASSETS.logo.placeholder} alt="NSD Logo" className="h-10 w-auto" />
+          <img src={ASSETS.logo.main} alt="NSD Logo" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop Nav */}

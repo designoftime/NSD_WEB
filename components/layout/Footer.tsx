@@ -10,7 +10,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <img src={ASSETS.logo.placeholder} alt="NSD Logo" className="h-8 w-auto" />
+              <img src={ASSETS.logo.main} alt="NSD Logo" className="h-8 w-auto" />
             </Link>
             <p className="text-gray-500 text-sm leading-relaxed mb-6">
               India's trusted home nursing platform. Certified care at your doorstep, booked from your phone.
