@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <path d="M20 10C20 4.47715 24.4772 0 30 0H50C55.5228 0 60 4.47715 60 10V50C60 55.5228 55.5228 60 50 60H30C24.4772 60 20 55.5228 20 50V10Z" fill="#56c3d8"/>
+  <path d="M10 20C4.47715 20 0 24.4772 0 30V30C0 35.5228 4.47715 40 10 40H70C75.5228 40 80 35.5228 80 30V30C80 24.4772 75.5228 20 70 20H10Z" fill="#56c3d8"/>
+  <rect x="25" y="15" width="30" height="30" rx="4" fill="white"/>
+  <path d="M35 30H45" stroke="#56c3d8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M40 25V35" stroke="#56c3d8" stroke-width="4" stroke-linecap="round"/>
+  <text x="90" y="42" font-family="Inter, sans-serif" font-weight="bold" font-size="32" fill="#171717">NSD</text>
+</svg>
