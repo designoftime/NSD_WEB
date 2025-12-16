@@ -5,19 +5,52 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { submitPublicEnquiry } from "@/lib/enquiry.api";
+
 
 export function Waitlist() {
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [form, setForm] = useState({
+  fullName: "",
+  mobileNumber: "",
+  city: "",
+  serviceNeeded: " ",
+});
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-    // Simulate API call
-    setTimeout(() => {
-      setStatus("success");
-    }, 1500);
-  };
+const [error, setError] = useState<string | null>(null);
 
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError(null);
+  setStatus("loading");
+
+  try {
+    const cleanedMobile = form.mobileNumber.replace(/\D/g, "").slice(-10);
+
+    await submitPublicEnquiry({
+      fullName: form.fullName.trim(),
+      mobileNumber: cleanedMobile,
+      city: form.city.trim(),
+      serviceNeeded: form.serviceNeeded,
+    });
+
+    setStatus("success");
+    setForm({
+  fullName: "",
+  mobileNumber: "",
+  city: "",
+  serviceNeeded: " ",
+})
+  } catch (err: any) {
+    setStatus("idle");
+    setError(
+      err?.response?.data?.message ||
+      err?.message ||
+      "Something went wrong"
+    );
+  }
+};
   return (
     <section id="waitlist" className="py-24 bg-teal-600 text-white overflow-hidden relative">
       <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -68,41 +101,82 @@ export function Waitlist() {
                   onSubmit={handleSubmit}
                 >
                   <h3 className="text-xl font-bold mb-6">Join the Waitlist</h3>
-                  
+
+                  {error && (
+                    <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg p-3">
+                      {error}
+                    </p>
+                  )}
+
                   <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium text-gray-700">Full Name</label>
-                    <Input id="name" placeholder="E.g. Rajesh Kumar" required />
+                    <label className="text-sm font-medium text-gray-700">
+                      Full Name
+                    </label>
+                    <Input
+                      placeholder="E.g. Rajesh Kumar"
+                      required
+                      value={form.fullName}
+                      onChange={(e) =>
+                        setForm({ ...form, fullName: e.target.value })
+                      }
+                    />
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="mobile" className="text-sm font-medium text-gray-700">Mobile Number</label>
-                    <Input id="mobile" type="tel" placeholder="+91 98765 43210" required pattern="[0-9]{10}" />
+                    <label className="text-sm font-medium text-gray-700">
+                      Mobile Number
+                    </label>
+                    <Input
+                      type="tel"
+                      placeholder="9876543210"
+                      required
+                      value={form.mobileNumber}
+                      maxLength={10}
+                      inputMode="numeric"
+                      onChange={(e) =>
+                        setForm({ ...form, mobileNumber: e.target.value })
+                      }
+                    />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label htmlFor="city" className="text-sm font-medium text-gray-700">City</label>
-                      <select id="city" className="flex h-12 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-                        <option>Mumbai</option>
-                        <option>Bangalore</option>
-                        <option>Delhi NCR</option>
-                        <option>Hyderabad</option>
-                        <option>Chennai</option>
-                        <option>Other</option>
-                      </select>
+                      <label className="text-sm font-medium text-gray-700">
+                        City
+                      </label>
+                      <Input
+                        placeholder="Indore"
+                        required
+                        value={form.city}
+                        onChange={(e) =>
+                          setForm({ ...form, city: e.target.value })
+                        }
+                      />
                     </div>
+
                     <div className="space-y-2">
-                      <label htmlFor="service" className="text-sm font-medium text-gray-700">Service Needed</label>
-                      <select id="service" className="flex h-12 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-                        <option>General Nursing</option>
+                      <label className="text-sm font-medium text-gray-700">
+                        Service Needed
+                      </label>
+                      <select
+                        value={form.serviceNeeded}
+                        onChange={(e) =>
+                          setForm({
+                            ...form,
+                            serviceNeeded: e.target.value,
+                          })
+                        }
+                        className="flex h-12 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      >
+                        <option>Other</option>
                         <option>Elderly Care</option>
-                        <option>Post-Op Care</option>
-                        <option>Baby Care</option>
-                        <option>Not Sure</option>
+                        <option>Post-Operative Care</option>
+                        <option>Newborn Care</option>
+                        <option>Chronic Care</option>
                       </select>
                     </div>
                   </div>
-
+                  
                   <Button 
                     type="submit" 
                     className="w-full text-lg h-12 mt-4 bg-accent hover:bg-accent/90 text-white" 
