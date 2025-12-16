@@ -19,8 +19,8 @@ export const ASSETS = {
         patient: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=800&auto=format&fit=crop",
     },
     logo: {
-        // placeholder: "/images/nsd-logo.svg", // We will create this
-        main: "https://cdn.discordapp.com/attachments/1448241546649538703/1450094410535538749/icon.png?ex=69414928&is=693ff7a8&hm=0360414aec10eea66c685daf253960c8c6b5ba37724a6bb0ca9ebea1c1ef26c9"
+        main: "/nsd_logo.svg", // We will create this
+        // main: "https://cdn.discordapp.com/attachments/1448241546649538703/1450094410535538749/icon.png?ex=69414928&is=693ff7a8&hm=0360414aec10eea66c685daf253960c8c6b5ba37724a6bb0ca9ebea1c1ef26c9"
     }
 };
 
