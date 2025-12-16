@@ -10,7 +10,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <img src={ASSETS.logo.main} alt="NSD Logo" className="h-15 w-auto" />
+              <img src={ASSETS.logo.main} alt="NSD Logo" className="h-20 w-auto" />
             </Link>
             <p className="text-gray-500 text-sm leading-relaxed mb-6">
               India's trusted home nursing platform. Certified care at your doorstep, booked from your phone.
@@ -52,8 +52,8 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-gray-900 mb-4">Contact</h3>
             <ul className="space-y-3 text-sm text-gray-500">
-              <li>support@nsd-india.com</li>
-              <li>+91 98765 43210 (Mon-Sat)</li>
+              <li>info@nsdcare.in</li>
+              <li>+91 8989419412 (Mon-Sat)</li>
               <li className="pt-2">
                 <span className="inline-block px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs font-medium">
                   Pre-launch Mode
