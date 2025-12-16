@@ -1,4 +1,4 @@
-:HL["/_next/static/chunks/e29d55ff4fc2efca.css","style"]
+:HL["/_next/static/chunks/a1836699865dfa98.css","style"]
 :HL["/_next/static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/images/nsd-logo.svg","image"]
-0:{"buildId":"yNi5MmsuhQu8e-CcHM73l","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+:HL["https://cdn.discordapp.com/attachments/1448241546649538703/1450094410535538749/icon.png?ex=69414928&is=693ff7a8&hm=0360414aec10eea66c685daf253960c8c6b5ba37724a6bb0ca9ebea1c1ef26c9","image"]
+0:{"buildId":"cQA4ydvyZQ4rTp6gXCBez","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
