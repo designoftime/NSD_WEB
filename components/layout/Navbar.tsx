@@ -48,6 +48,13 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
+
+          {/* Nurse Registration Button */}
+          <Button asChild variant="outline" className="rounded-full px-5">
+            <Link href="/nurse/register">Nurse Registration</Link>
+          </Button>
+
+
           <Button asChild className="rounded-full px-6 shadow-none" variant="default">
             <Link href="#waitlist">Join Waitlist</Link>
           </Button>
@@ -75,6 +82,16 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
+
+           {/*Nurse Registration (Mobile) */}
+          <Button asChild variant="outline" className="w-full">
+            <Link
+              href="/nurse/register" onClick={() => setIsMobileMenuOpen(false)}>
+              Nurse Registration
+            </Link>
+          </Button>
+
+
           <Button asChild className="w-full mt-2" size="lg">
             <Link href="#waitlist" onClick={() => setIsMobileMenuOpen(false)}>
               Join Waitlist
