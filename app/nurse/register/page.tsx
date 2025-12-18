@@ -457,343 +457,276 @@ const handleSubmit = async () => {
     errors[k] ? <div className="text-[11px] text-red-500 -mt-1 mb-3">{errors[k]}</div> : null;
 
   return (
-    <div className="bg-slate-50 min-h-screen">
-      <div className="max-w-3xl mx-auto px-4 pt-6">
-        <h1 className="text-2xl font-extrabold text-slate-900">Register as Nurse</h1>
-      </div>
+    
+ <div className="min-h-screen bg-slate-50 flex flex-col">
 
-      {/* Stepper */}
-      <div className="w-full mt-4">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="flex items-center justify-center gap-3">
-            {STEPS.map((s) => {
-              const active = step === s;
-              return (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => goToStep(s)}
-                  className={[
-                    'w-9 h-9 rounded-full flex items-center justify-center font-extrabold text-sm border-2 transition',
-                    active
-                      ? 'bg-teal-600 text-white border-teal-600'
-                      : 'bg-white text-teal-600 border-teal-600 hover:bg-teal-50',
-                  ].join(' ')}
-                >
-                  {s}
-                </button>
-              );
-            })}
+    {/* MAIN CENTER AREA (accounts for bottom bar height) */}
+    <div className="flex-1 flex items-center justify-center px-4">
+      <div className="w-full max-w-3xl">
+
+        {/* HEADER */}
+        <h1 className="text-2xl font-extrabold text-slate-900 text-center mb-3">
+          Register as Nurse
+        </h1>
+
+        {/* STEPPER */}
+        <div className="flex items-center justify-center gap-3 mb-6">
+          {STEPS.map((s) => {
+            const active = step === s;
+            return (
+              <button
+                key={s}
+                type="button"
+                onClick={() => goToStep(s)}
+                className={[
+                  'w-9 h-9 rounded-full flex items-center justify-center font-extrabold text-sm border-2 transition',
+                  active
+                    ? 'bg-teal-600 text-white border-teal-600'
+                    : 'bg-white text-teal-600 border-teal-600 hover:bg-teal-50',
+                ].join(' ')}
+              >
+                {s}
+              </button>
+            );
+          })}
+        </div>
+
+    {/* Form Card */}
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-6">
+
+      {/* STEP 1 */}
+      {step === 1 && (
+        <div className="space-y-2">
+          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Full name</div>
+          <input
+            className={clsInput('fullName')}
+            value={fullName}
+            onChange={(e) => { setFullName(e.target.value); clearError('fullName'); }}
+          />
+          <ErrorText k="fullName" />
+
+          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Phone Number</div>
+          <div className="flex items-center gap-3">
+            <div className="h-12 px-4 rounded-xl border-2 border-teal-600 bg-white flex items-center font-extrabold text-slate-900">
+              +91 ▾
+            </div>
+            <input
+              className={`${inputBase} flex-1 ${errors.phone ? borderErr : borderOk}`}
+              value={phone}
+              maxLength={10}
+              inputMode="numeric"
+              onChange={(e) => { setPhone(e.target.value.replace(/\D/g, '')); clearError('phone'); }}
+            />
           </div>
+          <ErrorText k="phone" />
+
+          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Email</div>
+          <input
+            className={clsInput('email')}
+            value={email}
+            onChange={(e) => { setEmail(e.target.value); clearError('email'); }}
+          />
+          <ErrorText k="email" />
+
+          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Referral Code (optional)</div>
+          <input
+            className={`${inputBase} ${borderOk}`}
+            value={referredByCode}
+            onChange={(e) => setReferredByCode(e.target.value.toUpperCase())}
+          />
+
+          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Gender</div>
+          <select
+            className={`${inputBase} ${errors.gender ? borderErr : borderOk}`}
+            value={gender}
+            onChange={(e) => { setGender(e.target.value); clearError('gender'); }}
+          >
+            <option value="">Select Gender</option>
+            {GENDER_OPTIONS.map((g) => (
+              <option key={g.value} value={g.value}>{g.label}</option>
+            ))}
+          </select>
+          <ErrorText k="gender" />
+
+          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Date of Birth</div>
+          <input
+            type="date"
+            className={`${inputBase} ${errors.dob ? borderErr : borderOk}`}
+            value={dob}
+            onChange={(e) => { setDob(e.target.value); clearError('dob'); }}
+          />
+          <ErrorText k="dob" />
         </div>
-      </div>
+      )}
 
-      {/* Form */}
-      <div className="max-w-3xl mx-auto px-4 pb-28">
-        <div className="mt-6 bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-6">
-          {/* STEP 1 */}
-          {step === 1 && (
-            <div className="space-y-2">
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Full name</div>
-              <input className={clsInput('fullName')} value={fullName} onChange={(e) => { setFullName(e.target.value); clearError('fullName'); }} />
-              <ErrorText k="fullName" />
+      {/* STEP 2 */}
+      {step === 2 && (
+        <div className="space-y-2">
+          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Alternate Phone Number</div>
+          <input
+            className={`${inputBase} ${borderOk}`}
+            value={alternatePhoneNumber}
+            onChange={(e) => setAlternatePhoneNumber(e.target.value.replace(/\D/g, ''))}
+          />
 
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Phone Number</div>
-              <div className="flex items-center gap-3">
-                <div className="h-12 px-4 rounded-xl border-2 border-teal-600 bg-white flex items-center font-extrabold text-slate-900">+91 ▾</div>
-                <input
-                  className={`${inputBase} flex-1 ${errors.phone ? borderErr : borderOk}`}
-                  value={phone}
-                  maxLength={10}
-                  inputMode="numeric"
-                  onChange={(e) => { setPhone(e.target.value.replace(/\D/g, '')); clearError('phone'); }}
-                />
-                {/* <button type="button" onClick={handleSendOtp} className="font-extrabold text-teal-700 hover:text-teal-800 whitespace-nowrap">
-                  Send OTP
-                </button> */}
-              </div>
-              <ErrorText k="phone" />
+          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Aadhaar Number</div>
+          <input
+            className={clsInput('aadhaarNumber')}
+            value={aadhaarNumber}
+            maxLength={12}
+            inputMode="numeric"
+            onChange={(e) => { setAadhaarNumber(e.target.value.replace(/\D/g, '')); clearError('aadhaarNumber'); }}
+          />
+          <ErrorText k="aadhaarNumber" />
 
-              {/* <div className="text-[13px] font-extrabold text-slate-900 mb-1">Verify Phone Number</div>
-              <div className="flex items-center gap-3">
-                <input
-                  className={`${inputBase} flex-1 ${errors.phoneOtp ? borderErr : borderOk}`}
-                  value={phoneOtp}
-                  inputMode="numeric"
-                  onChange={(e) => { setPhoneOtp(e.target.value.replace(/\D/g, '')); clearError('phoneOtp'); }}
-                />
-                <button type="button" onClick={handleVerifyOtp} className="font-extrabold text-teal-700 hover:text-teal-800 whitespace-nowrap">
-                  Verify
-                </button>
-              </div>
-              <ErrorText k="phoneOtp" /> */}
+          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Nursing Registration Number</div>
+          <input
+            className={clsInput('nursingRegistrationNumber')}
+            value={nursingRegistrationNumber}
+            onChange={(e) => { setNursingRegistrationNumber(e.target.value); clearError('nursingRegistrationNumber'); }}
+          />
+          <ErrorText k="nursingRegistrationNumber" />
 
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Email</div>
-              <input className={clsInput('email')} value={email} onChange={(e) => { setEmail(e.target.value); clearError('email'); }} />
-              <ErrorText k="email" />
+          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Qualification</div>
+          <input
+            className={clsInput('qualification')}
+            value={qualification}
+            onChange={(e) => { setQualification(e.target.value); clearError('qualification'); }}
+          />
+          <ErrorText k="qualification" />
 
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Referral Code (optional)</div>
-              <input className={`${inputBase} ${borderOk}`} value={referredByCode} onChange={(e) => setReferredByCode(e.target.value.toUpperCase())} />
+          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Working Status</div>
+          <select
+            className={`${inputBase} ${errors.workingStatus ? borderErr : borderOk}`}
+            value={workingStatus}
+            onChange={(e) => { setWorkingStatus(e.target.value); clearError('workingStatus'); }}
+          >
+            <option value="">Select Working Status</option>
+            {WORKING_STATUS_OPTIONS.map((w) => (
+              <option key={w.value} value={w.value}>{w.label}</option>
+            ))}
+          </select>
+          <ErrorText k="workingStatus" />
+        </div>
+      )}
 
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Gender</div>
-              <select className={`${inputBase} ${errors.gender ? borderErr : borderOk}`} value={gender} onChange={(e) => { setGender(e.target.value); clearError('gender'); }}>
-                <option value="">Select Gender</option>
-                {GENDER_OPTIONS.map((g) => (
-                  <option key={g.value} value={g.value}>{g.label}</option>
-                ))}
-              </select>
-              <ErrorText k="gender" />
+      {/* STEP 3 */}
+      {step === 3 && (
+        <div className="space-y-3">
+          <div className="text-[14px] font-extrabold text-slate-900">Upload Documents (Required)</div>
 
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Date of Birth</div>
-              <input type="date" className={`${inputBase} ${errors.dob ? borderErr : borderOk}`} value={dob} onChange={(e) => { setDob(e.target.value); clearError('dob'); }} />
-              <ErrorText k="dob" />
-            </div>
-          )}
-
-          {/* STEP 2 */}
-          {step === 2 && (
-            <div className="space-y-2">
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Alternate Phone Number</div>
-              <input className={`${inputBase} ${borderOk}`} value={alternatePhoneNumber} onChange={(e) => setAlternatePhoneNumber(e.target.value.replace(/\D/g, ''))} />
-
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Aadhaar Number</div>
-              <input className={clsInput('aadhaarNumber')} value={aadhaarNumber} maxLength={12} inputMode="numeric" onChange={(e) => { setAadhaarNumber(e.target.value.replace(/\D/g, '')); clearError('aadhaarNumber'); }} />
-              <ErrorText k="aadhaarNumber" />
-
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Nursing Registration Number</div>
-              <input className={clsInput('nursingRegistrationNumber')} value={nursingRegistrationNumber} onChange={(e) => { setNursingRegistrationNumber(e.target.value); clearError('nursingRegistrationNumber'); }} />
-              <ErrorText k="nursingRegistrationNumber" />
-
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Qualification</div>
-              <input className={clsInput('qualification')} value={qualification} onChange={(e) => { setQualification(e.target.value); clearError('qualification'); }} />
-              <ErrorText k="qualification" />
-
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Working Status</div>
-              <select className={`${inputBase} ${errors.workingStatus ? borderErr : borderOk}`} value={workingStatus} onChange={(e) => { setWorkingStatus(e.target.value); clearError('workingStatus'); }}>
-                <option value="">Select Working Status</option>
-                {WORKING_STATUS_OPTIONS.map((w) => (
-                  <option key={w.value} value={w.value}>{w.label}</option>
-                ))}
-              </select>
-              <ErrorText k="workingStatus" />
-
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Current Working Sector</div>
-              <select className={`${inputBase} ${errors.currentWorkingSector ? borderErr : borderOk}`} value={currentWorkingSector} onChange={(e) => { setCurrentWorkingSector(e.target.value); clearError('currentWorkingSector'); }}>
-                <option value="">Select Current Working Sector</option>
-                {SECTOR_OPTIONS.map((s) => (
-                  <option key={s.value} value={s.value}>{s.label}</option>
-                ))}
-              </select>
-              <ErrorText k="currentWorkingSector" />
-
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Working Experience (years)</div>
-              <input className={clsInput('workingExperience')} value={workingExperience} inputMode="numeric" onChange={(e) => { setWorkingExperience(e.target.value.replace(/\D/g, '')); clearError('workingExperience'); }} />
-              <ErrorText k="workingExperience" />
-
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Skills (comma separated)</div>
-              <input className={`${inputBase} ${borderOk}`} value={skills} onChange={(e) => setSkills(e.target.value)} />
-
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Street</div>
-              <input className={clsInput('street')} value={street} onChange={(e) => { setStreet(e.target.value); clearError('street'); }} />
-              <ErrorText k="street" />
-
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">City</div>
-              <input className={clsInput('city')} value={city} onChange={(e) => { setCity(e.target.value); clearError('city'); }} />
-              <ErrorText k="city" />
-
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">State</div>
-              <input className={clsInput('stateName')} value={stateName} onChange={(e) => { setStateName(e.target.value); clearError('stateName'); }} />
-              <ErrorText k="stateName" />
-
-              <div className="text-[13px] font-extrabold text-slate-900 mb-1">Pincode</div>
-              <input className={clsInput('pincode')} value={pincode} maxLength={6} inputMode="numeric" onChange={(e) => { setPincode(e.target.value.replace(/\D/g, '')); clearError('pincode'); }} />
-              <ErrorText k="pincode" />
-            </div>
-          )}
-
-          {/* STEP 3 */}
-          {step === 3 && (
-            <div className="space-y-3">
-              <div className="text-[14px] font-extrabold text-slate-900">Upload Documents (Required)</div>
-
-              {REQUIRED_DOCS.map((k) => (
-                <div key={k} className="rounded-2xl border border-teal-200 bg-white p-3">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="min-w-0">
-                      <div className="text-[13px] font-extrabold text-slate-900">{prettyLabel(k)}</div>
-                      {files[k] ? (
-                        <div className="text-[12px] text-slate-600 truncate mt-1">📎 {files[k]!.name}</div>
-                      ) : (
-                        <div className="text-[12px] text-slate-500 mt-1">No file selected</div>
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <label className="h-9 px-6 rounded-xl bg-teal-600 text-white font-extrabold cursor-pointer flex items-center justify-center">
-                        {files[k] ? 'Change' : 'Pick'}
-                        <input
-                          type="file"
-                          className="hidden"
-                          accept={k === 'passportPhoto' ? 'image/*' : 'image/*,application/pdf'}
-                          onChange={(e) => onPickFile(k, e.target.files?.[0] || null)}
-                        />
-                      </label>
-
-                      {files[k] ? (
-                        <button
-                          type="button"
-                          onClick={() => onRemoveFile(k)}
-                          className="h-9 px-4 rounded-xl border border-red-500 text-red-600 font-extrabold"
-                        >
-                          Remove
-                        </button>
-                      ) : null}
-                    </div>
+          {REQUIRED_DOCS.map((k) => (
+            <div key={k} className="rounded-2xl border border-teal-200 bg-white p-3">
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="text-[13px] font-extrabold text-slate-900">
+                    {prettyLabel(k)}
                   </div>
-
-                  {errors[k] ? <div className="text-[11px] text-red-500 mt-2">{errors[k]}</div> : null}
+                  {files[k] ? (
+                    <div className="text-[12px] text-slate-600 truncate mt-1">
+                      📎 {files[k]!.name}
+                    </div>
+                  ) : (
+                    <div className="text-[12px] text-slate-500 mt-1">No file selected</div>
+                  )}
                 </div>
-              ))}
+
+                <div className="flex items-center gap-2">
+                  <label className="h-9 px-6 rounded-xl bg-teal-600 text-white font-extrabold cursor-pointer flex items-center justify-center">
+                    {files[k] ? 'Change' : 'Pick'}
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept={k === 'passportPhoto' ? 'image/*' : 'image/*,application/pdf'}
+                      onChange={(e) => onPickFile(k, e.target.files?.[0] || null)}
+                    />
+                  </label>
+
+                  {files[k] && (
+                    <button
+                      type="button"
+                      onClick={() => onRemoveFile(k)}
+                      className="h-9 px-4 rounded-xl border border-red-500 text-red-600 font-extrabold"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {errors[k] && (
+                <div className="text-[11px] text-red-500 mt-2">
+                  {errors[k]}
+                </div>
+              )}
             </div>
-          )}
+          ))}
+        </div>
+      )}
 
-          {/* STEP 4 */}
-          {step === 4 && (
-            <div>
-              <div className="text-[16px] font-extrabold text-slate-900">
-                What kind of nursing work do you want to take?
-              </div>
-              <div className="text-[12px] text-slate-500 mt-1">Pick from multiple categories and services.</div>
+      {/* STEP 4 */}
+      {step === 4 && (
+        <div>
+          <div className="text-[16px] font-extrabold text-slate-900">
+            What kind of nursing work do you want to take?
+          </div>
+          <div className="text-[12px] text-slate-500 mt-1">
+            Pick from multiple categories and services.
+          </div>
 
-              <div className="mt-4">
-                {loadingCats ? (
-                  <div className="text-slate-500">Loading categories...</div>
-                ) : (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {categories.map((cat) => {
-                      const isActive = cat._id === activeCategoryId;
-                      const count = selectedCountForCat(cat._id);
-                      const iconUri = `${IMAGE_BASE}${cat.icon || ''}`;
-
-                      return (
-                        <button
-                          key={cat._id}
-                          type="button"
-                          onClick={() => {
-                            setActiveCategoryId(cat._id);
-                            fetchServicesForCategory(cat._id);
-                          }}
-                          className={[
-                            'rounded-2xl border p-3 text-center transition shadow-sm',
-                            isActive ? 'border-teal-600 bg-teal-50' : 'border-slate-200 bg-white hover:bg-slate-50',
-                          ].join(' ')}
-                        >
-                          <div className="mx-auto w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center mb-2">
-                            {cat?.icon && isBitmap(cat.icon) ? (
-                              // eslint-disable-next-line @next/next/no-img-element
-                              <img src={iconUri} alt={cat.name} className="w-7 h-7 object-contain" />
-                            ) : (
-                              <div className="text-teal-700 font-extrabold">+</div>
-                            )}
-                          </div>
-
-                          <div className={['text-[12px] font-extrabold leading-4', isActive ? 'text-teal-800' : 'text-slate-900'].join(' ')}>
-                            {cat.name}
-                          </div>
-                          <div className="text-[11px] text-slate-500 mt-1">{count} selected</div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-
-              <div className="mt-5 rounded-2xl border border-teal-200 bg-white p-4">
-                <div className="text-[13px] font-extrabold text-slate-900 mb-3">Select services</div>
-
-                {loadingServicesFor === activeCategoryId ? (
-                  <div className="text-slate-500">Loading services...</div>
-                ) : currentServices.length === 0 ? (
-                  <div className="text-slate-500 text-sm">No services found in this category.</div>
-                ) : (
-                  <div className="divide-y divide-slate-100">
-                    {currentServices.map((srv) => {
-                      const checked = selectedServiceIds.includes(srv._id);
-                      return (
-                        <button
-                          type="button"
-                          key={srv._id}
-                          onClick={() => toggleService(srv._id)}
-                          className="w-full text-left py-3 flex items-start gap-3"
-                        >
-                          <div
-                            className={[
-                              'mt-1 w-5 h-5 rounded-md border-2 flex items-center justify-center',
-                              checked ? 'bg-teal-600 border-teal-600' : 'bg-white border-teal-600',
-                            ].join(' ')}
-                          >
-                            {checked ? <span className="text-white text-xs font-black">✓</span> : null}
-                          </div>
-
-                          <div className="flex-1">
-                            <div className={['text-[14px] font-extrabold', checked ? 'text-teal-800' : 'text-slate-900'].join(' ')}>
-                              {srv.title}
-                            </div>
-                            {srv.description ? (
-                              <div className="text-[12px] text-slate-500 line-clamp-1">{srv.description}</div>
-                            ) : null}
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-
-              {errors.services ? <div className="text-[11px] text-red-500 mt-2">{errors.services}</div> : null}
+          {errors.services && (
+            <div className="text-[11px] text-red-500 mt-2">
+              {errors.services}
             </div>
           )}
         </div>
-      </div>
+      )}
+
+    </div>
+  </div>
+</div>
 
       {/* Bottom buttons */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200">
-        <div className="max-w-3xl mx-auto px-4 py-3 flex gap-3 justify-end items-center">
-          {step > 1 ? (
-            <button
-              type="button"
-              onClick={() => setStep((s) => (s - 1) as Step)}
-              className="h-12 px-6 rounded-xl bg-slate-100 text-slate-900 font-extrabold"
-            >
-              Prev
-            </button>
-          ) : (
-            <div className="w-[92px]" />
-          )}
+      <div className="h-20 fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200">
+      <div className="max-w-3xl mx-auto px-4 h-full flex gap-3 justify-end items-center">
+        {step > 1 ? (
+          <button
+            type="button"
+            onClick={() => setStep((s) => (s - 1) as Step)}
+            className="h-12 px-6 rounded-xl bg-slate-100 text-slate-900 font-extrabold"
+          >
+            Prev
+          </button>
+        ) : (
+          <div className="w-[92px]" />
+        )}
 
-          {step < 4 ? (
-            <button
-              type="button"
-              onClick={handleNext}
-              className="px-10 h-12 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-[16px]"
-            >
-              Next
-            </button>
-          ) : (
-            <button
-              type="button"
-              disabled={isSubmitting}
-              onClick={handleSubmit}
-              className={[
-                'w-60 h-12 rounded-xl text-white font-extrabold text-[16px]',
-                isSubmitting ? 'bg-teal-300 cursor-not-allowed' : 'bg-teal-600 hover:bg-teal-700',
-              ].join(' ')}
-            >
-              {isSubmitting ? 'Submitting...' : 'Submit'}
-            </button>
-          )}
-        </div>
+        {step < 4 ? (
+          <button
+            type="button"
+            onClick={handleNext}
+            className="px-10 h-12 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-[16px]"
+          >
+            Next
+          </button>
+        ) : (
+          <button
+            type="button"
+            disabled={isSubmitting}
+            onClick={handleSubmit}
+            className={[
+              'w-60 h-12 rounded-xl text-white font-extrabold text-[16px]',
+              isSubmitting
+                ? 'bg-teal-300 cursor-not-allowed'
+                : 'bg-teal-600 hover:bg-teal-700',
+            ].join(' ')}
+          >
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </button>
+        )}
       </div>
     </div>
-  );
+
+  </div>
+);
 }
