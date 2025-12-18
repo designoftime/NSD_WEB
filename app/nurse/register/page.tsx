@@ -129,14 +129,17 @@ export default function NurseRegisterPage() {
       setLoadingCats(true);
       try {
         const res = await categoryService.getCategoriesDropdown();
-        const list = Array.isArray(res?.data?.data)
-          ? res.data.data
-          : Array.isArray(res?.data)
-          ? res.data
-          : [];
+        const list =
+        res?.data?.data?.categories ||
+        res?.data?.data ||
+        res?.data?.categories ||
+        res?.data ||
+        [];
+
         setCategories(list || []);
         if (list?.length) setActiveCategoryId(list[0]._id);
-      } catch {
+      } catch (err) {
+        console.error('Category API error:', err);
         notifyError('Unable to load categories');
       } finally {
         setLoadingCats(false);
@@ -146,7 +149,7 @@ export default function NurseRegisterPage() {
 
   const fetchServicesForCategory = useCallback(
     async (catId: string) => {
-      if (!catId || categoryServices[catId]) return;
+      if (!catId || categoryServices[catId]?.length) return;
       setLoadingServicesFor(catId);
       try {
         const res = await categoryService.getNurseServicesDropdown(catId);
@@ -752,8 +755,6 @@ const handleSubmit = async () => {
   </div>
 )}
 
-      
-
       {/* STEP 3 */}
       {step === 3 && (
         <div className="space-y-3">
@@ -808,23 +809,144 @@ const handleSubmit = async () => {
         </div>
       )}
 
-      {/* STEP 4 */}
-      {step === 4 && (
-        <div>
-          <div className="text-[16px] font-extrabold text-slate-900">
-            What kind of nursing work do you want to take?
-          </div>
-          <div className="text-[12px] text-slate-500 mt-1">
-            Pick from multiple categories and services.
-          </div>
+{/* STEP 4 */}
+{step === 4 && (
+  <div>
 
-          {errors.services && (
-            <div className="text-[11px] text-red-500 mt-2">
-              {errors.services}
-            </div>
-          )}
+    <div className="text-[16px] font-extrabold text-slate-900">
+      What kind of nursing work do you want to take?
+    </div>
+
+    <div className="text-[12px] text-slate-500 mt-1">
+      Pick from multiple categories and services.
+    </div>
+
+    {/* Categories */}
+    <div className="mt-4">
+      {loadingCats ? (
+        <div className="text-slate-500">Loading categories...</div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {categories.map((cat) => {
+            const isActive = cat._id === activeCategoryId;
+            const count = selectedCountForCat(cat._id);
+            const iconUri = `${IMAGE_BASE}${cat.icon || ''}`;
+
+            return (
+              <button
+                key={cat._id}
+                type="button"
+                onClick={() => {
+                  setActiveCategoryId(cat._id);
+                  fetchServicesForCategory(cat._id);
+                }}
+                className={[
+                  'rounded-2xl border p-3 text-center transition shadow-sm',
+                  isActive
+                    ? 'border-teal-600 bg-teal-50'
+                    : 'border-slate-200 bg-white hover:bg-slate-50',
+                ].join(' ')}
+              >
+                <div className="mx-auto w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center mb-2">
+                  {cat?.icon && isBitmap(cat.icon) ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={iconUri}
+                      alt={cat.name}
+                      className="w-7 h-7 object-contain"
+                    />
+                  ) : (
+                    <div className="text-teal-700 font-extrabold">+</div>
+                  )}
+                </div>
+
+                <div
+                  className={[
+                    'text-[12px] font-extrabold leading-4',
+                    isActive ? 'text-teal-800' : 'text-slate-900',
+                  ].join(' ')}
+                >
+                  {cat.name}
+                </div>
+
+                <div className="text-[11px] text-slate-500 mt-1">
+                  {count} selected
+                </div>
+              </button>
+            );
+          })}
         </div>
       )}
+    </div>
+
+    {/* Services */}
+    <div className="mt-5 rounded-2xl border border-teal-200 bg-white p-4">
+      <div className="text-[13px] font-extrabold text-slate-900 mb-3">
+        Select services
+      </div>
+
+      {loadingServicesFor === activeCategoryId ? (
+        <div className="text-slate-500">Loading services...</div>
+      ) : currentServices.length === 0 ? (
+        <div className="text-slate-500 text-sm">
+          No services found in this category.
+        </div>
+      ) : (
+        <div className="divide-y divide-slate-100">
+          {currentServices.map((srv) => {
+            const checked = selectedServiceIds.includes(srv._id);
+
+            return (
+              <button
+                key={srv._id}
+                type="button"
+                onClick={() => toggleService(srv._id)}
+                className="w-full text-left py-3 flex items-start gap-3"
+              >
+                <div
+                  className={[
+                    'mt-1 w-5 h-5 rounded-md border-2 flex items-center justify-center',
+                    checked
+                      ? 'bg-teal-600 border-teal-600'
+                      : 'bg-white border-teal-600',
+                  ].join(' ')}
+                >
+                  {checked && (
+                    <span className="text-white text-xs font-black">✓</span>
+                  )}
+                </div>
+
+                <div className="flex-1">
+                  <div
+                    className={[
+                      'text-[14px] font-extrabold',
+                      checked ? 'text-teal-800' : 'text-slate-900',
+                    ].join(' ')}
+                  >
+                    {srv.title}
+                  </div>
+
+                  {srv.description && (
+                    <div className="text-[12px] text-slate-500 line-clamp-1">
+                      {srv.description}
+                    </div>
+                  )}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+
+    {errors.services && (
+      <div className="text-[11px] text-red-500 mt-2">
+        {errors.services}
+      </div>
+    )}
+  </div>
+)}
+
 
     </div>
   </div>
