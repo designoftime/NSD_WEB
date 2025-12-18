@@ -559,56 +559,200 @@ const handleSubmit = async () => {
         </div>
       )}
 
-      {/* STEP 2 */}
-      {step === 2 && (
-        <div className="space-y-2">
-          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Alternate Phone Number</div>
-          <input
-            className={`${inputBase} ${borderOk}`}
-            value={alternatePhoneNumber}
-            onChange={(e) => setAlternatePhoneNumber(e.target.value.replace(/\D/g, ''))}
-          />
+{/* STEP 2 */}
+{step === 2 && (
+  <div className="space-y-2">
 
-          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Aadhaar Number</div>
-          <input
-            className={clsInput('aadhaarNumber')}
-            value={aadhaarNumber}
-            maxLength={12}
-            inputMode="numeric"
-            onChange={(e) => { setAadhaarNumber(e.target.value.replace(/\D/g, '')); clearError('aadhaarNumber'); }}
-          />
-          <ErrorText k="aadhaarNumber" />
+    {/* Alternate Phone */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      Alternate Phone Number
+    </div>
+    <input
+      className={`${inputBase} ${borderOk}`}
+      value={alternatePhoneNumber}
+      inputMode="numeric"
+      onChange={(e) =>
+        setAlternatePhoneNumber(e.target.value.replace(/\D/g, ''))
+      }
+    />
 
-          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Nursing Registration Number</div>
-          <input
-            className={clsInput('nursingRegistrationNumber')}
-            value={nursingRegistrationNumber}
-            onChange={(e) => { setNursingRegistrationNumber(e.target.value); clearError('nursingRegistrationNumber'); }}
-          />
-          <ErrorText k="nursingRegistrationNumber" />
+    {/* Aadhaar */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      Aadhaar Number
+    </div>
+    <input
+      className={clsInput('aadhaarNumber')}
+      value={aadhaarNumber}
+      maxLength={12}
+      inputMode="numeric"
+      onChange={(e) => {
+        setAadhaarNumber(e.target.value.replace(/\D/g, ''));
+        clearError('aadhaarNumber');
+      }}
+    />
+    <ErrorText k="aadhaarNumber" />
 
-          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Qualification</div>
-          <input
-            className={clsInput('qualification')}
-            value={qualification}
-            onChange={(e) => { setQualification(e.target.value); clearError('qualification'); }}
-          />
-          <ErrorText k="qualification" />
+    {/* Nursing Registration */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      Nursing Registration Number
+    </div>
+    <input
+      className={clsInput('nursingRegistrationNumber')}
+      value={nursingRegistrationNumber}
+      onChange={(e) => {
+        setNursingRegistrationNumber(e.target.value);
+        clearError('nursingRegistrationNumber');
+      }}
+    />
+    <ErrorText k="nursingRegistrationNumber" />
 
-          <div className="text-[13px] font-extrabold text-slate-900 mb-1">Working Status</div>
-          <select
-            className={`${inputBase} ${errors.workingStatus ? borderErr : borderOk}`}
-            value={workingStatus}
-            onChange={(e) => { setWorkingStatus(e.target.value); clearError('workingStatus'); }}
-          >
-            <option value="">Select Working Status</option>
-            {WORKING_STATUS_OPTIONS.map((w) => (
-              <option key={w.value} value={w.value}>{w.label}</option>
-            ))}
-          </select>
-          <ErrorText k="workingStatus" />
-        </div>
-      )}
+    {/* Qualification */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      Qualification
+    </div>
+    <input
+      className={clsInput('qualification')}
+      value={qualification}
+      onChange={(e) => {
+        setQualification(e.target.value);
+        clearError('qualification');
+      }}
+    />
+    <ErrorText k="qualification" />
+
+    {/* Working Status */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      Working Status
+    </div>
+    <select
+      className={`${inputBase} ${
+        errors.workingStatus ? borderErr : borderOk
+      }`}
+      value={workingStatus}
+      onChange={(e) => {
+        setWorkingStatus(e.target.value);
+        clearError('workingStatus');
+      }}
+    >
+      <option value="">Select Working Status</option>
+      {WORKING_STATUS_OPTIONS.map((w) => (
+        <option key={w.value} value={w.value}>
+          {w.label}
+        </option>
+      ))}
+    </select>
+    <ErrorText k="workingStatus" />
+
+    {/* Current Working Sector */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      Current Working Sector
+    </div>
+    <select
+      className={`${inputBase} ${
+        errors.currentWorkingSector ? borderErr : borderOk
+      }`}
+      value={currentWorkingSector}
+      onChange={(e) => {
+        setCurrentWorkingSector(e.target.value);
+        clearError('currentWorkingSector');
+      }}
+    >
+      <option value="">Select Current Working Sector</option>
+      {SECTOR_OPTIONS.map((s) => (
+        <option key={s.value} value={s.value}>
+          {s.label}
+        </option>
+      ))}
+    </select>
+    <ErrorText k="currentWorkingSector" />
+
+    {/* Working Experience */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      Working Experience (years)
+    </div>
+    <input
+      className={clsInput('workingExperience')}
+      value={workingExperience}
+      inputMode="numeric"
+      onChange={(e) => {
+        setWorkingExperience(e.target.value.replace(/\D/g, ''));
+        clearError('workingExperience');
+      }}
+    />
+    <ErrorText k="workingExperience" />
+
+    {/* Skills */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      Skills (comma separated)
+    </div>
+    <input
+      className={`${inputBase} ${borderOk}`}
+      value={skills}
+      onChange={(e) => setSkills(e.target.value)}
+    />
+
+    {/* Street */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      Street
+    </div>
+    <input
+      className={clsInput('street')}
+      value={street}
+      onChange={(e) => {
+        setStreet(e.target.value);
+        clearError('street');
+      }}
+    />
+    <ErrorText k="street" />
+
+    {/* City */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      City
+    </div>
+    <input
+      className={clsInput('city')}
+      value={city}
+      onChange={(e) => {
+        setCity(e.target.value);
+        clearError('city');
+      }}
+    />
+    <ErrorText k="city" />
+
+    {/* State */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      State
+    </div>
+    <input
+      className={clsInput('stateName')}
+      value={stateName}
+      onChange={(e) => {
+        setStateName(e.target.value);
+        clearError('stateName');
+      }}
+    />
+    <ErrorText k="stateName" />
+
+    {/* Pincode */}
+    <div className="text-[13px] font-extrabold text-slate-900 mb-1">
+      Pincode
+    </div>
+    <input
+      className={clsInput('pincode')}
+      value={pincode}
+      maxLength={6}
+      inputMode="numeric"
+      onChange={(e) => {
+        setPincode(e.target.value.replace(/\D/g, ''));
+        clearError('pincode');
+      }}
+    />
+    <ErrorText k="pincode" />
+
+  </div>
+)}
+
+      
 
       {/* STEP 3 */}
       {step === 3 && (
