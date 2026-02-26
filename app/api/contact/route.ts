@@ -101,14 +101,42 @@ export async function POST(request: Request) {
                 font-size: 12px;
                 color: #9ca3af;
               }
+                
             </style>
           </head>
           <body>
             <div class="container">
               <div class="header">
-                <img src="${process.env.IMAGE_BASE_URL}/nsd_logo.png" alt="NSD" class="logo" />
-                <h2>NSD Enquiry</h2>
-              </div>
+  <table align="center" cellpadding="0" cellspacing="0" role="presentation">
+    <tr>
+      <td align="center">
+        <table
+          width="100"
+          height="100"
+          cellpadding="0"
+          cellspacing="0"
+          role="presentation"
+          style="background-color:#ffffff; border-radius:50%; text-align:center;"
+        >
+          <tr>
+            <td align="center" valign="middle">
+              <img 
+                src="${process.env.IMAGE_BASE_URL}/nsd_logo.png" 
+                alt="NSD" 
+                width="60" 
+                style="display:block;"
+              />
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <h2 style="color:#ffffff; margin-top:20px;">
+    NSD Enquiry
+  </h2>
+</div>
 
               <div class="content">
                 <div class="section-title">Personal Information</div>
