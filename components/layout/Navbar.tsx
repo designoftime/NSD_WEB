@@ -20,8 +20,9 @@ export function Navbar() {
 
   const navLinks = [
     { name: "How it Works", href: "#how-it-works" },
-    { name: "Services", href: "#services" },
+    { name: "Services", href: "/services" },
     { name: "Why NSD", href: "#why-nsd" },
+    { name: "About Us", href: "/about-us" },
   ];
 
   return (
