@@ -19,9 +19,9 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "How it Works", href: "#how-it-works" },
+    { name: "How it Works", href: "/#how-it-works" },
     { name: "Services", href: "/services" },
-    { name: "Why NSD", href: "#why-nsd" },
+    { name: "Why NSD", href: "/#why-nsd" },
     { name: "About Us", href: "/about-us" },
   ];
 
@@ -96,7 +96,7 @@ export function Navbar() {
           </Button> */}
 
           <Button asChild className="w-full mt-2" size="lg">
-            <Link href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/#contact" onClick={() => setIsMobileMenuOpen(false)}>
               Contact Us
             </Link>
           </Button>
