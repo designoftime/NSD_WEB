@@ -10,7 +10,7 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       <Navbar />
-      
+
       <main className="pt-32 pb-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl mb-16 px-4">
@@ -31,16 +31,16 @@ export default function ServicesPage() {
               >
                 <Link href={`/services/${service.slug}`} className="block h-full">
                   <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={service.image} 
-                      alt={service.title} 
+                    <img
+                      src={service.image}
+                      alt={service.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-sm">
                       <service.icon className="w-6 h-6 text-primary" />
                     </div>
                   </div>
-                  
+
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="text-xl font-bold text-gray-900">{service.title}</h3>
@@ -51,9 +51,9 @@ export default function ServicesPage() {
                     <p className="text-gray-600 mb-6 line-clamp-2">
                       {service.description}
                     </p>
-                    
+
                     <div className="inline-flex items-center text-sm font-medium text-primary group-hover:translate-x-1 transition-all">
-                      Coming Soon <ArrowRight className="ml-2 h-4 w-4" />
+                      View <ArrowRight className="ml-2 h-4 w-4" />
                     </div>
                   </div>
                 </Link>
