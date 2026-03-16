@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "B5U7C6885S.com.dot.nsd.client",
+        "paths": ["/invite/c*"]
+      },
+      {
+        "appID": "B5U7C6885S.com.dot.nsd.nurse",
+        "paths": ["/invite/n*"]
+      }
+    ]
+  }
+}

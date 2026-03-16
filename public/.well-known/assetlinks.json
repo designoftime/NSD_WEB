@@ -1,0 +1,22 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.dot.nsd.client",
+      "sha256_cert_fingerprints": [
+        "5B:A1:FE:F8:68:F2:1B:DC:B8:F0:FA:80:84:90:5D:A7:49:CD:B3:71:3E:2D:57:EA:6D:4E:FF:9C:51:CD:88:7E"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.dot.nsd.nurse",
+      "sha256_cert_fingerprints": [
+        "C5:E5:17:E0:6E:FA:34:73:07:EA:1B:BA:8B:41:6A:AB:DA:BB:78:B1:C1:E4:F2:2C:8F:FD:54:39:54:4C:A9:5E"
+      ]
+    }
+  }
+]
