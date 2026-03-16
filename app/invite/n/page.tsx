@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function InviteNursePage() {
+function InviteNurseContent() {
   const searchParams = useSearchParams();
   const refCode = searchParams.get('ref') || '';
   const [mounted, setMounted] = useState(false);
@@ -39,5 +39,13 @@ export default function InviteNursePage() {
         </a>
       </div>
     </div>
+  );
+}
+
+export default function InviteNursePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>}>
+      <InviteNurseContent />
+    </Suspense>
   );
 }

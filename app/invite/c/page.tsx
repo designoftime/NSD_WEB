@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function InviteCustomerPage() {
+function InviteCustomerContent() {
   const searchParams = useSearchParams();
   const refCode = searchParams.get('ref') || '';
   const [mounted, setMounted] = useState(false);
@@ -42,5 +42,13 @@ export default function InviteCustomerPage() {
         </a>
       </div>
     </div>
+  );
+}
+
+export default function InviteCustomerPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>}>
+      <InviteCustomerContent />
+    </Suspense>
   );
 }
