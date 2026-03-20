@@ -2,6 +2,8 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { CUSTOMER_ANDROID_APP_URL, NURSE_IOS_CUSTOMER_APP_URL } from '@/utils/contants';
+
 
 function InviteCustomerContent() {
   const searchParams = useSearchParams();
@@ -29,13 +31,15 @@ function InviteCustomerContent() {
           Download the NSD App to book professional nursing services at your doorstep.
         </p>
         <a 
-          href="https://play.google.com/store/apps/details?id=com.dot.nsd.client" 
+          href={CUSTOMER_ANDROID_APP_URL}
+          target='_blank'
           className="block w-full bg-teal-600 text-white font-semibold py-3 px-4 rounded-xl mb-4 hover:bg-teal-700 transition"
         >
           Download for Android
         </a>
         <a 
-          href="https://apps.apple.com/in/app/nsd/id647..." 
+          href={NURSE_IOS_CUSTOMER_APP_URL}
+          target='_blank'
           className="block w-full bg-black text-white font-semibold py-3 px-4 rounded-xl hover:bg-gray-800 transition"
         >
           Download for iOS

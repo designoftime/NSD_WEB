@@ -2,6 +2,7 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { NURSE_ANDROID_APP_URL, NURSE_IOS_APP_URL } from '@/utils/contants';
 
 function InviteNurseContent() {
   const searchParams = useSearchParams();
@@ -26,13 +27,15 @@ function InviteNurseContent() {
           Download the NSD Nurse App to start your journey providing premium nursing services.
         </p>
         <a 
-          href="https://play.google.com/store/apps/details?id=com.dot.nsd.nurse" 
+          href={NURSE_ANDROID_APP_URL} 
+          target='_blank'
           className="block w-full bg-teal-600 text-white font-semibold py-3 px-4 rounded-xl mb-4 hover:bg-teal-700 transition"
         >
           Download for Android
         </a>
         <a 
-          href="https://apps.apple.com/in/app/nsd-nurse/id647..." 
+          href={NURSE_IOS_APP_URL}
+          target='_blank'
           className="block w-full bg-black text-white font-semibold py-3 px-4 rounded-xl hover:bg-gray-800 transition"
         >
           Download for iOS
